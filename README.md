@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # My Portfolio
 Welcome to my portfolio! This project showcases my skills, projects, and experiences as a web developer.
 
@@ -61,3 +62,6 @@ Contributions are welcome! If you'd like to contribute to My Portfolio, please f
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
+=======
+# Vishal-react-portfolio
+>>>>>>> d7445709003ddc0f6f643ff093506666e49fdcd9

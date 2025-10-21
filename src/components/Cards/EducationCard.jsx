@@ -35,23 +35,48 @@ text-overflow: ellipsis;
 
 const Card = styled.div`
     width: 650px;
-    border-radius: 10px;
-    box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
-    padding: 12px 16px;
+    background-color: ${({ theme }) => theme.card};
+    border-radius: 16px;
+    border: 2px solid ${({ theme }) => theme.card_border};
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px ${({ theme }) => theme.card_border};
+    padding: 20px 24px;
     justify-content: space-between;
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    transition: all 0.3s ease-in-out;
-    &:hover{
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
-        transform: translateY(-5px);
+    gap: 14px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: ${({ theme }) => theme.secondary};
+        transform: scaleY(0);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    &:hover{
+        border-color: ${({ theme }) => theme.secondary};
+        box-shadow:
+            0 16px 48px rgba(0, 0, 0, 0.4),
+            0 0 60px ${({ theme }) => theme.shadow_secondary};
+        transform: translateY(-6px);
+    }
+
+    &:hover::before {
+        transform: scaleY(1);
+    }
+
     @media only screen and (max-width: 768px){
-        padding: 10px;
-        gap: 8px;
+        padding: 16px 20px;
+        gap: 10px;
         width: 300px;
     }
 
@@ -62,9 +87,7 @@ const Card = styled.div`
     &:hover ${Span}{
         overflow: visible;
         -webkit-line-clamp: unset;
-
     }
-    border: 0.1px solid #854CE6;
 `
 
 const Top = styled.div`

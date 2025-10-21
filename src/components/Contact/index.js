@@ -62,11 +62,30 @@ const ContactForm = styled.form`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.card};
-  padding: 32px;
-  border-radius: 16px;
-  box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
+  padding: 40px;
+  border-radius: 20px;
+  border: 2px solid ${({ theme }) => theme.card_border};
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.3),
+    0 0 60px ${({ theme }) => theme.shadow_primary};
   margin-top: 28px;
-  gap: 12px;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: ${({ theme }) => theme.primary};
+  }
+
+  @media (max-width: 768px) {
+    padding: 28px 24px;
+  }
 `
 
 const ContactTitle = styled.div`
@@ -78,29 +97,48 @@ const ContactTitle = styled.div`
 
 const ContactInput = styled.input`
   flex: 1;
-  background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.text_secondary};
+  background-color: ${({ theme }) => theme.bgLight};
+  border: 2px solid ${({ theme }) => theme.card_border};
   outline: none;
-  font-size: 18px;
+  font-size: 16px;
   color: ${({ theme }) => theme.text_primary};
-  border-radius: 12px;
-  padding: 12px 16px;
+  border-radius: 10px;
+  padding: 14px 18px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
   &:focus {
-    border: 1px solid ${({ theme }) => theme.primary};
+    border: 2px solid ${({ theme }) => theme.primary};
+    background-color: ${({ theme }) => theme.card_light};
+    box-shadow: 0 0 20px ${({ theme }) => theme.shadow_primary};
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme.text_secondary};
   }
 `
 
 const ContactInputMessage = styled.textarea`
   flex: 1;
-  background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.text_secondary};
+  background-color: ${({ theme }) => theme.bgLight};
+  border: 2px solid ${({ theme }) => theme.card_border};
   outline: none;
-  font-size: 18px;
+  font-size: 16px;
   color: ${({ theme }) => theme.text_primary};
-  border-radius: 12px;
-  padding: 12px 16px;
+  border-radius: 10px;
+  padding: 14px 18px;
+  resize: vertical;
+  min-height: 120px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
   &:focus {
-    border: 1px solid ${({ theme }) => theme.primary};
+    border: 2px solid ${({ theme }) => theme.primary};
+    background-color: ${({ theme }) => theme.card_light};
+    box-shadow: 0 0 20px ${({ theme }) => theme.shadow_primary};
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme.text_secondary};
   }
 `
 
@@ -108,17 +146,28 @@ const ContactButton = styled.input`
   width: 100%;
   text-decoration: none;
   text-align: center;
-  background: hsla(271, 100%, 50%, 1);
-  background: linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-  background: -moz-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-  background: -webkit-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-  padding: 13px 16px;
-  margin-top: 2px;
+  background: ${({ theme }) => theme.primary};
+  padding: 14px 16px;
+  margin-top: 8px;
   border-radius: 12px;
-  border: none;
-  color: ${({ theme }) => theme.text_primary};
+  border: 2px solid ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.bg};
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px ${({ theme }) => theme.shadow_primary};
+
+  &:hover {
+    background: ${({ theme }) => theme.secondary};
+    border-color: ${({ theme }) => theme.secondary};
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px ${({ theme }) => theme.shadow_secondary};
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 `
 
 

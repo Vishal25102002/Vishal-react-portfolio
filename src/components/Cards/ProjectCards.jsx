@@ -20,19 +20,43 @@ const Card = styled.div`
     height: 490px;
     background-color: ${({ theme }) => theme.card};
     cursor: pointer;
-    border-radius: 10px;
-    box-shadow: 0 0 12px 4px rgba(0,0,0,0.4);
+    border-radius: 16px;
+    border: 2px solid ${({ theme }) => theme.card_border};
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px ${({ theme }) => theme.card_border};
     overflow: hidden;
-    padding: 26px 20px;
+    padding: 24px 20px;
     display: flex;
     flex-direction: column;
     gap: 14px;
-    transition: all 0.5s ease-in-out;
-    &:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 0 50px 4px rgba(0,0,0,0.6);
-        filter: brightness(1.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: ${({ theme }) => theme.primary};
+        transform: scaleX(0);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    &:hover {
+        transform: translateY(-8px);
+        border-color: ${({ theme }) => theme.primary};
+        box-shadow:
+            0 16px 48px rgba(0, 0, 0, 0.4),
+            0 0 60px ${({ theme }) => theme.shadow_primary};
+    }
+
+    &:hover::before {
+        transform: scaleX(1);
+    }
+
     &:hover ${Button} {
         display: block;
     }
@@ -42,8 +66,14 @@ const Image = styled.img`
     width: 100%;
     height: 180px;
     background-color: ${({ theme }) => theme.white};
-    border-radius: 10px;
-    box-shadow: 0 0 16px 2px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.02);
+    }
 `
 
 const Tags = styled.div`
@@ -56,12 +86,19 @@ const Tags = styled.div`
 `
 
 const Tag = styled.span`
-    font-size: 12px;
-    font-weight: 400;
+    font-size: 11px;
+    font-weight: 500;
     color: ${({ theme }) => theme.primary};
-    background-color: ${({ theme }) => theme.primary + 15};
-    padding: 2px 8px;
-    border-radius: 10px;
+    background-color: ${({ theme }) => theme.primary}15;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid ${({ theme }) => theme.primary}30;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: ${({ theme }) => theme.primary}25;
+        border-color: ${({ theme }) => theme.primary};
+    }
 `
 
 const Details = styled.div`

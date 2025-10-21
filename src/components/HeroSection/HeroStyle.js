@@ -2,20 +2,45 @@ import styled from "styled-components";
 import _default from "../../themes/default";
 
 export const HeroContainer = styled.div`
-  background: ${({ theme }) => theme.card_light};
+  background: ${({ theme }) => theme.bg};
   display: flex;
   justify-content: center;
   position: relative;
-  padding: 80px 30px;
+  padding: 100px 30px 80px;
   @media (max-width: 960px) {
-    padding: 66px 16px;
+    padding: 80px 16px 66px;
   }
-  @media (max-width: 640) {
-    padding: 32px 16px;
+  @media (max-width: 640px) {
+    padding: 60px 16px 40px;
   }
   z-index: 1;
+  overflow: hidden;
 
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 95%, 0 100%);
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(circle at 20% 50%, ${({ theme }) => theme.shadow_primary} 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, ${({ theme }) => theme.shadow_secondary} 0%, transparent 50%);
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 1px solid ${({ theme }) => theme.primary}20;
+    top: -250px;
+    right: -250px;
+    z-index: 0;
+  }
 `;
 
 export const HeroBg = styled.div`
@@ -99,16 +124,30 @@ export const Img = styled.img`
   max-width: 400px;
   max-height: 400px;
   border-radius: 50%;
-  border: 2px solid ${({ theme }) => theme.primary};
+  border: 4px solid ${({ theme }) => theme.primary};
+  box-shadow:
+    0 0 40px ${({ theme }) => theme.glow_primary},
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+
+  &:hover {
+    transform: scale(1.05);
+    border-color: ${({ theme }) => theme.secondary};
+    box-shadow:
+      0 0 60px ${({ theme }) => theme.glow_secondary},
+      0 25px 80px rgba(0, 0, 0, 0.4);
+  }
 
   @media (max-width: 768px) {
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 350px;
+    max-height: 350px;
   }
 
   @media (max-width: 640px) {
-    max-width: 280px;
-    max-height: 280px;
+    max-width: 260px;
+    max-height: 260px;
   }
 `;
 
@@ -174,30 +213,49 @@ export const ResumeButton = styled.a`
     width: 95%;
     max-width: 300px;
     text-align: center;
-    padding: 16px 0;
-    color:${({ theme }) => theme.white};
-    border-radius: 20px;
+    padding: 16px 32px;
+    color: ${({ theme }) => theme.bg};
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 20px;
-    font-weight: 600;
-    transition: all 0.2s ease-in-out !important;
-    background: hsla(271, 100%, 50%, 1);
-    background: linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-    background: -moz-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-    background: -webkit-linear-gradient(225deg, hsla(271, 100%, 50%, 1) 0%, hsla(294, 100%, 50%, 1) 100%);
-    box-shadow:  20px 20px 60px #1F2634,
-    -20px -20px 60px #1F2634;
-    &:hover {
-        transform: scale(1.05);
-    transition: all 0.4s ease-in-out;
-    box-shadow:  20px 20px 60px #1F2634,
-    filter: brightness(1);
-    }    
-    
-    
-    @media (max-width: 640px) {
-        padding: 12px 0;
-        font-size: 18px;
-    } 
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: ${({ theme }) => theme.primary};
+    border: 2px solid ${({ theme }) => theme.primary};
+    box-shadow: 0 4px 20px ${({ theme }) => theme.shadow_primary},
+                0 0 40px ${({ theme }) => theme.shadow_primary};
+    position: relative;
+    overflow: hidden;
 
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: ${({ theme }) => theme.secondary};
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: -1;
+    }
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px ${({ theme }) => theme.shadow_primary},
+                    0 0 60px ${({ theme }) => theme.glow_primary};
+        border-color: ${({ theme }) => theme.secondary};
+    }
+
+    &:hover::before {
+        left: 0;
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    @media (max-width: 640px) {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
 `;

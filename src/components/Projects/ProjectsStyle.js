@@ -2,14 +2,28 @@ import styled from 'styled-components';
 import _default from '../../themes/default';
 
 export const Container = styled.div`
-    background: linear-gradient(343.07deg, rgba(132, 59, 206, 0.06) 5.71%, rgba(132, 59, 206, 0) 64.83%);
+    background: ${({ theme }) => theme.bgLight};
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
     z-index: 1;
     align-items: center;
-    clip-path: polygon(0 0, 100% 0, 100% 100%,100% 98%, 0 100%);
+    padding: 60px 0;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+            radial-gradient(circle at 10% 20%, ${({ theme }) => theme.shadow_primary} 0%, transparent 40%),
+            radial-gradient(circle at 90% 80%, ${({ theme }) => theme.shadow_secondary} 0%, transparent 40%);
+        opacity: 0.3;
+        pointer-events: none;
+    }
 `;
 
 export const Wrapper = styled.div`
@@ -52,32 +66,47 @@ export const Desc = styled.div`
 
 export const ToggleButtonGroup = styled.div`
     display: flex;
-    border: 1.5px solid ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.primary};
-    font-size: 16px;
-    border-radius: 12px;
+    border: 2px solid ${({ theme }) => theme.card_border};
+    background: ${({ theme }) => theme.card};
+    color: ${({ theme }) => theme.text_primary};
+    font-size: 15px;
+    border-radius: 16px;
     font-weight: 500;
-    margin: 22px 0px;
+    margin: 28px 0px;
+    padding: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
     @media (max-width: 768px) {
-        font-size: 12px;
+        font-size: 13px;
+        padding: 4px;
     }
 `
 
 export const ToggleButton = styled.div`
-    padding: 8px 18px;
-    border-radius: 6px;
+    padding: 10px 24px;
+    border-radius: 12px;
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+
     ${({ active, theme }) =>
         active && `
-    background: ${theme.primary + 20};
-    `
-    }
+        background: ${theme.primary};
+        color: ${theme.bg};
+        box-shadow: 0 2px 12px ${theme.shadow_primary};
+    `}
+
     &:hover {
-        background: ${({ theme }) => theme.primary + 8};
+        background: ${({ active, theme }) =>
+            active ? theme.primary : theme.primary + '20'};
+        color: ${({ active, theme }) =>
+            active ? theme.bg : theme.primary};
     }
+
     @media (max-width: 768px) {
-        padding: 6px 8px;
-        border-radius: 4px;
+        padding: 8px 16px;
+        border-radius: 10px;
     }
 `
 export const Divider = styled.div`

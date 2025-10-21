@@ -21,9 +21,24 @@ const Body = styled.div`
 `
 
 const Wrapper = styled.div`
-  background: linear-gradient(38.73deg, rgba(204, 0, 187, 0.15) 0%, rgba(201, 32, 184, 0) 50%), linear-gradient(141.27deg, rgba(0, 70, 209, 0) 50%, rgba(0, 70, 209, 0.15) 100%);
+  background: ${({ theme }) => theme.bgLight};
   width: 100%;
-  clip-path: polygon(0 0, 100% 0, 100% 100%,30% 98%, 0 100%);
+  position: relative;
+  padding: 40px 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(circle at 15% 30%, ${({ theme }) => theme.shadow_primary} 0%, transparent 45%),
+      radial-gradient(circle at 85% 70%, ${({ theme }) => theme.shadow_secondary} 0%, transparent 45%);
+    opacity: 0.25;
+    pointer-events: none;
+  }
 `
 function App() {
   const [darkMode, setDarkMode] = useState(true);

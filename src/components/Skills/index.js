@@ -60,20 +60,42 @@ const Skill = styled.div`
   width: 100%;
   max-width: 500px;
   background: ${({ theme }) => theme.card};
-  border: 0.1px solid #854CE6;
-  box-shadow: rgba(23, 92, 230, 0.15) 0px 4px 24px;
-  border-radius: 16px;
-  padding: 18px 36px;
+  border: 2px solid ${({ theme }) => theme.card_border};
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px ${({ theme }) => theme.card_border};
+  border-radius: 20px;
+  padding: 24px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: ${({ theme }) => theme.primary};
+  }
+
+  &:hover {
+    border-color: ${({ theme }) => theme.primary};
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.4),
+      0 0 60px ${({ theme }) => theme.shadow_primary};
+    transform: translateY(-4px);
+  }
+
   @media (max-width: 768px) {
     max-width: 400px;
-    padding: 10px 36px;
+    padding: 20px 28px;
   }
   @media (max-width: 500px) {
     max-width: 330px;
-    padding: 10px 36px;
+    padding: 18px 24px;
   }
-
-
 `
 
 const SkillTitle = styled.h2`
@@ -93,23 +115,33 @@ const SkillList = styled.div`
 `
 
 const SkillItem = styled.div`
-  font-size: 16px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.text_primary + 80};
-  border: 1px solid ${({ theme }) => theme.text_primary + 80};
+  font-size: 15px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.text_primary};
+  background-color: ${({ theme }) => theme.bgLight};
+  border: 2px solid ${({ theme }) => theme.card_border};
   border-radius: 12px;
-  padding: 12px 16px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    border-color: ${({ theme }) => theme.primary};
+    background-color: ${({ theme }) => theme.primary}10;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px ${({ theme }) => theme.shadow_primary};
+  }
+
   @media (max-width: 768px) {
     font-size: 14px;
-    padding: 8px 12px;
+    padding: 8px 14px;
   }
   @media (max-width: 500px) {
-    font-size: 14px;
-    padding: 6px 12px;
+    font-size: 13px;
+    padding: 7px 12px;
   }
 `
 
